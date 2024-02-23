@@ -1,4 +1,4 @@
-import csv  # importing the csv module to work with csv files
+import csv  # import csv module to work with csv files
 
 
 # function to load address data from csv file
