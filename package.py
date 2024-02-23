@@ -1,22 +1,30 @@
+# import the csv module to work with csv files
 import csv
+
+# import datetime and timedelta classes
 from datetime import datetime, timedelta
 
+# import the chaining hash table class from hashtable module
 from hashtable import ChainingHashTable
 
 
 # create package object
 class Package:
     def __init__(self, id, address, city, state, zip, deadline, weight, notes, status):
+        # convert deadline EOD to standard time format
         if deadline == "EOD":
             _deadline = "5:00 PM"
         else:
             _deadline = deadline
+        # initialize Package object with provided attributes
         self.id = id
         self.address = address
         self.city = city
         self.state = state
         self.zip = zip
-        self.deadline = datetime.strptime(_deadline, "%I:%M %p").time()
+        self.deadline = datetime.strptime(
+            _deadline, "%I:%M %p"
+        ).time()  # convert deadline string to time object
         self.weight = weight
         self.notes = notes
         self.status = status
@@ -24,6 +32,7 @@ class Package:
         self.delivery_time = None
 
     def __str__(self):
+        # string representation of Package object
         return "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s" % (
             self.id,
             self.address,
@@ -38,14 +47,6 @@ class Package:
             self.delivery_time,
         )
 
-    # def update_status(self, convert_time):
-    #     if self.delivery_time < convert_time:
-    #         self.status = "Delivered"
-    #     elif self.delivery_time > convert_time:
-    #         self.status = "En Route"
-    #     else:
-    #         self.status = "At Hub"
-
 
 # create load package data
 def load_package_data(hashTable):
@@ -53,6 +54,7 @@ def load_package_data(hashTable):
         package_data = csv.reader(package_file, delimiter=",")
         next(package_data)
         for item in package_data:
+            # extracting package data from csv
             package_id = int(item[0])
             package_address = item[1]
             package_city = item[2]
@@ -63,6 +65,7 @@ def load_package_data(hashTable):
             package_notes = item[7]
             package_status = "At Hub"
 
+            # creating Package object
             package_value = Package(
                 package_id,
                 package_address,
@@ -74,16 +77,6 @@ def load_package_data(hashTable):
                 package_notes,
                 package_status,
             )
-
+            # insert Package object into the hash table
             hashTable.insert(package_id, package_value)
     return hashTable
-
-
-# def update_status(convert_time):
-#     if package.delivery_time < convert_time:
-#         package.status = "Delivered"
-#     elif package.delivery_time > convert_time:
-#         package.status = "En Route"
-#     else:
-#         package.status = "At Hub"
-# update_status(convert_time)
