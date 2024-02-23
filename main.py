@@ -348,8 +348,6 @@ def print_single_status(user_input):
 
 
 # print all the package status with specific time
-
-
 def print_all_time(input_time):
 
     # convert input_time to the same format as the converted current time
@@ -434,7 +432,7 @@ def print_single_time(input_time, pkgID):
         pkg9.address = "300 State St"
         pkg9.zip = "84103"
 
-    print("📍 Status report for all trucks at ", input_time_str)
+    print("📍 Status report for truck ", input, " at ", input_time_str)
 
     package = package_hashTable.search(input)  # search for the specific package
 
@@ -485,14 +483,29 @@ def print_single_time(input_time, pkgID):
 def print_all_truck(truck):
     print("📍 Report for all truck details")
     # printing total mileage
-    print("total mileage: ", total_mileage)
+    print("As of now: ", convert_time, " Total Mileage: ", total_mileage)
     for index, truck in enumerate([truck1, truck2, truck3], start=1):
         print("Truck ", index, ": ")
         print("Packages delivered in this order: ", truck.load)
-        print("Departed the hub at: ", truck.start_time)
-        print("Delivered all packages at: ", truck.time)
+
         # # print("🚒🚒🚒🚒🚒🚒 Trucks: ", truck)
         # total_mileage += round(truck.mileage, 2)
+
+        # # convert delivery_time to the same format as the converted current time
+        truck_time_str = (datetime(2024, 1, 1) + truck.time).strftime("%H:%M:%S")
+        # convert depart_time to the same format as the converted current time
+        start_time_str = (datetime(2024, 1, 1) + truck.start_time).strftime("%H:%M:%S")
+
+        # update status based on the current time
+        if truck_time_str <= convert_time:
+            print("Departed the hub at: ", truck.start_time)
+            print("Delivered all packages at: ", truck.time)
+        elif truck_time_str > convert_time and start_time_str <= convert_time:
+            print("Departed the hub at: ", truck.start_time)
+            print("Expect to deliver all packages by: ", truck.time)
+        else:
+            print("Expect to leave the hub at: ", truck.start_time)
+            print("Expect to deliver all packages by: ", truck.time)
 
 
 # print_all_truck(truck)
@@ -510,7 +523,7 @@ def main():
         print("2. print a single package status with delivery time")
         print("3. print all package status with specific time")
         print("4. print single package status with specific time")
-        print("5. print details for all trucks")
+        print("5. print details for all trucks & total mileage")
 
         print("9. exit")
 
