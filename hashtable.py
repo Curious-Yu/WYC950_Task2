@@ -35,7 +35,6 @@ class ChainingHashTable:
         # get the bucket list where this key would be.
         bucket = hash(key) % len(self.table)
         bucket_list = self.table[bucket]
-        # print(bucket_list)
 
         # search for the key in the bucket list
         for kv in bucket_list:
@@ -45,7 +44,6 @@ class ChainingHashTable:
         return None
 
     # Removes an item with matching key from the hash table.
-
     def remove(self, key):
         # get the bucket list where this item will be removed from.
         bucket = hash(key) % len(self.table)
@@ -53,9 +51,7 @@ class ChainingHashTable:
 
         # remove the item from the bucket list if it is present.
         for kv in bucket_list:
-            # print (key_value)
             if kv[0] == key:
-                # bucket_list.remove([kv[0], kv[1]])
                 bucket_list.remove(kv)
                 return True
         return False  # key not found
