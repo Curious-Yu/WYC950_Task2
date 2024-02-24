@@ -405,7 +405,7 @@ def print_all_truck(truck):
 # print_all_truck(truck)
 
 
-# UI menu
+# UI menu with options asking for inputs
 def main():
     print("\nWelcome to WGUPS tracking system!")
     while True:
