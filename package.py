@@ -45,6 +45,7 @@ class Package:
             self.status,
             self.depart_time,
             self.delivery_time,
+            self.truck_num,
         )
 
 
