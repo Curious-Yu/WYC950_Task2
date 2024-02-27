@@ -144,6 +144,8 @@ def delivery(truck: Truck):
 
         # add the new found package with the nearest distance to the truck
         loading_list.append(next_package.id)
+        # add truck number to package
+        next_package.truck_num = f"truck: {truck_num}"
         # the new found package address will be the address use to locate the next package
         address_x = next_package.address
         # keep track of the mileage
@@ -183,7 +185,8 @@ def delivery(truck: Truck):
 total_mileage = 0.0
 
 # deliver packages for each truck and update total mileage
-for truck in [truck1, truck2, truck3]:
+for index, truck in enumerate([truck1, truck2, truck3]):
+    truck_num = index + 1 # using this to add turck number to each package
     delivery(truck)
     # total mileage
     total_mileage += round(truck.mileage, 2)
@@ -201,6 +204,7 @@ def print_all_status():
                 print(
                     "Package ID: ",
                     package.id,
+                    package.truck_num,
                     " Address: ",
                     package.address,
                     " Status: ",
@@ -212,6 +216,7 @@ def print_all_status():
                 print(
                     "Package ID: ",
                     package.id,
+                    package.truck_num,
                     " Address: ",
                     package.address,
                     " Status: ",
@@ -235,6 +240,7 @@ def print_single_status(user_input):
             print(
                 "Package ID: ",
                 package.id,
+                package.truck_num,
                 " Address: ",
                 package.address,
                 " Status: ",
@@ -246,6 +252,7 @@ def print_single_status(user_input):
             print(
                 "Package ID: ",
                 package.id,
+                package.truck_num,
                 " Address: ",
                 package.address,
                 " Status: ",
@@ -295,6 +302,7 @@ def print_all_time(input_time):
                 print(
                     "Package ID: ",
                     package.id,
+                    package.truck_num,
                     " Address: ",
                     package.address,
                     " Status: ",
@@ -306,6 +314,7 @@ def print_all_time(input_time):
                 print(
                     "Package ID: ",
                     package.id,
+                    package.truck_num,
                     " Address: ",
                     package.address,
                     " Status: ",
@@ -355,6 +364,7 @@ def print_single_time(input_time, pkgID):
             print(
                 "Package ID: ",
                 package.id,
+                package.truck_num,
                 " Address: ",
                 package.address,
                 " Status: ",
@@ -366,6 +376,7 @@ def print_single_time(input_time, pkgID):
             print(
                 "Package ID: ",
                 package.id,
+                package.truck_num,
                 " Address: ",
                 package.address,
                 " Status: ",
