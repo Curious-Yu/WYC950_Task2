@@ -186,7 +186,7 @@ total_mileage = 0.0
 
 # deliver packages for each truck and update total mileage
 for index, truck in enumerate([truck1, truck2, truck3]):
-    truck_num = index + 1 # using this to add turck number to each package
+    truck_num = index + 1  # using this to add truck number to each package
     delivery(truck)
     # total mileage
     total_mileage += round(truck.mileage, 2)
